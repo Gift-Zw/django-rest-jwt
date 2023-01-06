@@ -19,7 +19,7 @@ class MyTokenObtainPairSerializerGoat(TokenObtainPairSerializer):
                 refresh['role'] = self.user.role
                 data["refresh"] = str(refresh)
                 data["access"] = str(refresh.access_token)
-                data["user_id"] = self.user.id
+                data["id"] = self.user.id
                 data['username'] = self.user.username
                 data["name"] = self.user.full_name
                 return data

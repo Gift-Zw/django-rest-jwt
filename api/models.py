@@ -47,8 +47,8 @@ class CustomUserManager(BaseUserManager):
 
 # Create your User Model here.
 class User(AbstractBaseUser,PermissionsMixin):
-    username = models.CharField(max_length=255, unique=True, db_index=True)
-    email = models.EmailField(unique=True, max_length=254)
+    username = models.CharField(max_length=255, unique=True)
+    email = models.EmailField(unique=True, max_length=254, db_index=True)
     first_name = models.CharField(max_length=240)
     last_name = models.CharField(max_length=255)
     role = models.CharField(max_length=50, choices=USER_ROLES)
@@ -60,8 +60,8 @@ class User(AbstractBaseUser,PermissionsMixin):
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'role']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'role']
 
     class Meta:
         verbose_name = 'User'

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
-        user = authenticate(username=attrs['username'], password=attrs['password'])
+        user = authenticate(username=attrs['email'], password=attrs['password'])
         if user is not None:
             if user.is_active:
                 data = super().validate(attrs)
@@ -28,7 +28,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             else:
                 raise serializers.ValidationError('Account is not active')
         else:
-            raise serializers.ValidationError('Incorrect username and password combination!')
+            raise serializers.ValidationError('Incorrect email and password combination!')
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
